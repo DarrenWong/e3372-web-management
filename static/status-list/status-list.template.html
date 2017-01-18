@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+  <h1>&nbspWeb Management</h1>
+    <div class="col-md-2">
+      <p>Data status: {{dataSwitch}}</p>
+      <p>DeviceName: {{deviceName}}</p>
+      <p>ISP: {{ispName}}</p>
+      <button ng-click="sendDataOn()">Data on</button>
+      <button ng-click="sendDataoff()">Data off</button>
+     <p> </p>
+      <form ng-submit="submit()" nng-controller="PhoneListController">
+        <label>Number: <input type="text" ng-model="number" name="number"/></label><br />
+        <label>Text: <input type="text" ng-model="smstext" name="text" /></label><br />
+        <input type="submit" id="submit" value="submit" />
+      </form>
+      <p>{{Send_SMS}}</p>
+    </div>
+    <div class="col-md-10">
+      <ul class="phones">   
+        <li ng-repeat="(key, value) in phones">
+           {{key}}: {{value}}
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
