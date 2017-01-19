@@ -1,6 +1,6 @@
 # E3372-Web-Management
 ------------
-E3372 API data retrieve using Python Flask and AngularJs. It can display the status of Networks and post dataswtich and send sms under the Python REST interface. Tested in Raspberry Pi 3 with JESSIE Release date:2017-01-11 and Mac OS 10.12
+Getting E3372 device information using Python Flask and AngularJs. It can display the status of Networks and post dataswtich and send sms under the Python REST interface. Tested in Raspberry Pi 3 with JESSIE Release date:2017-01-11 and Mac OS 10.12
 
 Installation
 ------------
