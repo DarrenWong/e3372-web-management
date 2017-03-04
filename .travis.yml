@@ -1,0 +1,12 @@
+language: python
+
+sudo: required
+
+python:
+  - 2.7
+
+install:
+  - pip install flask
+  - pip install requests
+  - pip install xmltodict
+script: python e3372Web.py
