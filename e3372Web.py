@@ -7,7 +7,17 @@ import requests
 import xmltodict
 import json
 import time
+import logging
+from logging.handlers import RotatingFileHandler
 
+logger = logging.getLogger('my_logger')
+logger.setLevel(logging.INFO)
+handler = RotatingFileHandler('logs/configlog.log', maxBytes=2000, backupCount=5)
+# create a logging format
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
 class CustomFlask(Flask):   # custom the flask var as {#var#}
     jinja_options = Flask.jinja_options.copy()
     jinja_options.update(dict(
@@ -76,7 +86,7 @@ def mainpage():
     try:
         return render_template('index.html', updatetime = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
     except:
-        print "error"
+        logger.error("Render mainpage failed")  
         return "error"
 
 @app.route('/getdata', methods=['GET'])  #API data return as json
@@ -88,8 +98,10 @@ def getAPIdata():
             for key,value in e3372.get(path).items():
                 if  (value):
                     dict[key]=value
+        logger.info("Get dongle data successful")
         return jsonify(**dict)
     except: 
+        logger.error("Get dongole data failed")  
         return "Unknown error"
 
 @app.route('/sendsms', methods=['POST']) #send Message using POST
@@ -101,8 +113,10 @@ def sendsms():
         name = dataDict['number']
         text = dataDict['SMStext']
         test = e3372.postSMS("/api/sms/send-sms", name,text).get('response')
+        logger.info("Sent Message")
         return "Message status: %s" %test
     except: 
+        logger.error("Send Message failed")  
         return "Unknown error"
 
 @app.route('/dataswitch', methods=['POST']) # mobile data on or off using POST 
@@ -113,8 +127,10 @@ def dataswitch():
         dataswitch = dataDict['dataswitch']
         e3372 = HuaweiE3372()
         test = e3372.postdataswitch("/api/dialup/mobile-dataswitch",dataswitch).get('response',None)
-        return "Dataswtich status: %s" %test
+        logger.info("Data switched")
+        return "Dataswitch status: %s" %test
     except: 
+        logger.error("data switch failed")  
         return "Unknown error"
 
 if __name__ == "__main__":
