@@ -16,8 +16,8 @@ handler = RotatingFileHandler('logs/configlog.log', maxBytes=2000, backupCount=5
 # create a logging format
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
-
 logger.addHandler(handler)
+
 class CustomFlask(Flask):   # custom the flask var as {#var#}
     jinja_options = Flask.jinja_options.copy()
     jinja_options.update(dict(
