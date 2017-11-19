@@ -71,7 +71,7 @@ class HuaweiE3372(object):
     else:
       Token = xmltodict.parse(self.session.get(self.base_url + "/api/webserver/token").text).get('response', None).get("token")
       headers = {'__RequestVerificationToken': Token, "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
-      
+
     Length = str(len(text))  # text length
     post_data = "<request><Index>-1</Index><Phones><Phone>" + number + "</Phone></Phones><Sca></Sca><Content>" + text + "</Content><Length>" + Length + "</Length><Reserved>1</Reserved><Date>-1</Date></request>"
     logging.debug(post_data)
@@ -107,11 +107,8 @@ def getAPIdata():
         logger.info("Get dongle data successful")
         return jsonify(**dict)
     except:
-        ex_type, ex, tb = sys.exc_info()
-        logger.exception("Get dongole data failed")
-        return "Unknown error: %s" % traceback.format_tb(tb, 500)
-    finally:
-        del tb
+        logger.error("Get dongole data failed")
+        return "Unknown error"
 
 @app.route('/sendsms', methods=['POST']) #send Message using POST
 def sendsms():
