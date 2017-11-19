@@ -106,7 +106,7 @@ def getAPIdata():
                     dict[key]=value
         logger.info("Get dongle data successful")
         return jsonify(**dict)
-    except:
+    except: 
         logger.error("Get dongole data failed")
         return "Unknown error"
 
