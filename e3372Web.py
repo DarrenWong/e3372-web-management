@@ -106,8 +106,8 @@ def getAPIdata():
                     dict[key]=value
         logger.info("Get dongle data successful")
         return jsonify(**dict)
-    except: 
-        logger.error("Get dongole data failed")
+    except:
+        logger.error("Get dongole data failed")  
         return "Unknown error"
 
 @app.route('/sendsms', methods=['POST']) #send Message using POST
