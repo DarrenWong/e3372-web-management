@@ -97,9 +97,11 @@ def getAPIdata():
         e3372 = HuaweiE3372()
         dict = {}
         for path in e3372.XML_APIS:
-            for key,value in e3372.get(path).items():
-                if  (value):
-                    dict[key]=value
+            path_data = e3372.get(path)
+            if path_data is not None:
+                for key,value in e3372.get(path).items():
+                    if  (value):
+                        dict[key]=value
         logger.info("Get dongle data successful")
         return jsonify(**dict)
     except:
