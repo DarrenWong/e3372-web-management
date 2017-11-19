@@ -105,10 +105,8 @@ def getAPIdata():
         logger.info("Get dongle data successful")
         return jsonify(**dict)
     except:
-        ex_type, ex, tb = sys.exc_info()
         logger.exception("Get dongole data failed")
-        #return "Unknown error: %s" % traceback.format_tb(tb, 500)
-        return "Unknown error:\n%s" % traceback.format_exc()
+        return "Unknown error"
 
 @app.route('/sendsms', methods=['POST']) #send Message using POST
 def sendsms():
