@@ -109,8 +109,6 @@ def getAPIdata():
         logger.exception("Get dongole data failed")
         #return "Unknown error: %s" % traceback.format_tb(tb, 500)
         return "Unknown error:\n%s" % traceback.format_exc()
-    finally:
-        del tb
 
 @app.route('/sendsms', methods=['POST']) #send Message using POST
 def sendsms():
