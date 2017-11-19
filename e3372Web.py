@@ -103,8 +103,8 @@ def getAPIdata():
         return jsonify(**dict)
     except:
         ex_type, ex, tb = sys.exc_info()
-        logger.error("Get dongole data failed:\n%s" % traceback.format_tb(tb, 500))
-        return "Unknown error"
+        logger.exception("Get dongole data failed")
+        return "Unknown error: %s" % traceback.format_tb(tb, 500)
     finally:
         del tb
 
