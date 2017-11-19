@@ -99,7 +99,7 @@ def getAPIdata():
         for path in e3372.XML_APIS:
             path_data = e3372.get(path)
             if path_data is not None:
-                for key,value in e3372.get(path).items():
+                for key,value in path_data.items():
                     if  (value):
                         dict[key]=value
         logger.info("Get dongle data successful")
