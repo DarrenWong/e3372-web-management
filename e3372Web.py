@@ -8,6 +8,7 @@ import xmltodict
 import json
 import time
 import logging
+import traceback
 from logging.handlers import RotatingFileHandler
 
 logger = logging.getLogger('my_logger')
@@ -100,9 +101,12 @@ def getAPIdata():
                     dict[key]=value
         logger.info("Get dongle data successful")
         return jsonify(**dict)
-    except: 
-        logger.error("Get dongole data failed")  
+    except:
+        ex_type, ex, tb = sys.exc_info()
+        logger.error("Get dongole data failed:\n%s" % traceback.format_tb(tb, 500))
         return "Unknown error"
+    finally:
+        del tb
 
 @app.route('/sendsms', methods=['POST']) #send Message using POST
 def sendsms():
