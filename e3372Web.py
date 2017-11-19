@@ -105,7 +105,8 @@ def getAPIdata():
     except:
         ex_type, ex, tb = sys.exc_info()
         logger.exception("Get dongole data failed")
-        return "Unknown error: %s" % traceback.format_tb(tb, 500)
+        #return "Unknown error: %s" % traceback.format_tb(tb, 500)
+        return "Unknown error:\n%s" % traceback.format_exc()
     finally:
         del tb
 
